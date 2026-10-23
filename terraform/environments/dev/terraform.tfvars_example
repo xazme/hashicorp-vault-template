@@ -1,0 +1,57 @@
+### ROOT CA ###
+root_ca_subject = {
+  country             = "BY"
+  province            = "Grodno Region"
+  locality            = "Grodno"
+  organization        = "AMSWI Tech LLC"
+  organizational_unit = "Infrastructure & Security"
+  common_name         = "Auto Parts Management System With Integrations Root CA (Dev)"
+}
+
+root_ca_validity_period_hours = 87600 # 10 years (365 * 24 * 10)
+root_ca_key_algorithm         = "RSA"
+root_ca_key_rsa_bits          = 4096
+
+### INTERMEDIATE CA ###
+intermediate_ca_subject = {
+  country             = "BY"
+  province            = "Grodno Region"
+  locality            = "Grodno"
+  organization        = "AMSWI Tech LLC"
+  organizational_unit = "Infrastructure & Security"
+  common_name         = "Auto Parts Management System With Integrations Intermediate CA (Dev)"
+}
+
+intermediate_ca_validity_period_hours = 43800 # 5 years (365 * 24 * 5)
+intermediate_ca_key_algorithm         = "RSA"
+intermediate_ca_key_rsa_bits          = 4096
+
+### VAULT CLUSTER ###
+vault_cert_subject = {
+  country             = "BY"
+  province            = "Grodno Region"
+  locality            = "Grodno"
+  organization        = "AMSWI Tech LLC"
+  organizational_unit = "Infrastructure & Security Vault"
+}
+vault_nodes_config = {
+  "1" = {
+    common_name  = "vault-1.dev.internal"
+    dns_names    = ["localhost", "vault", "vault-1", "vault-1.dev.internal"]
+    ip_addresses = ["127.0.0.1"]
+  },
+  "2" = {
+    common_name  = "vault-2.dev.internal"
+    dns_names    = ["localhost", "vault", "vault-2", "vault-2.dev.internal"]
+    ip_addresses = ["127.0.0.1"]
+  },
+  "3" = {
+    common_name  = "vault-3.dev.internal"
+    dns_names    = ["localhost", "vault", "vault-3", "vault-3.dev.internal"]
+    ip_addresses = ["127.0.0.1"]
+  }
+}
+vault_cert_validity_period_hours = 365 * 24 * 5 # 5 years
+vault_key_algorithm              = "RSA"
+vault_key_rsa_bits               = 2048
+vault_certs_output_dir           = "overlays/dev/infrastructure/vault/certs"
