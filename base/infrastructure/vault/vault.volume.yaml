@@ -1,0 +1,4 @@
+volumes:
+  vault-config:
+    external: false
+    name: vault-config

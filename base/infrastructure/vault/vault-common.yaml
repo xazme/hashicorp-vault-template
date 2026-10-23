@@ -1,0 +1,16 @@
+services:
+  vault-common:
+    build: .
+    restart: unless-stopped
+    command: [ "vault", "server", "-config=/vault/config/vault.hcl" ]
+    cap_add:
+      - IPC_LOCK
+    environment:
+      - SKIP_SETCAP=1
+      - VAULT_CACERT=/vault/config/certs/ca.pem
+      - VAULT_CLIENT_CERT=/vault/config/certs/vault.pem
+      - VAULT_CLIENT_KEY=/vault/config/certs/vault.key
+    networks:
+      - vault-cluster
+    volumes:
+      - ./config/policies:/vault/config/policies
