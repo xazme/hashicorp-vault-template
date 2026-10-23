@@ -32,17 +32,24 @@ Unlike typical `-dev` mode setups, this repository configures a proper Chain of 
 ## Quick Start
 **1. Clone the repository**
 ```bash
-git clone https://github.com/xazme/hashicorp-vault-template/tree/high-availability-cluster
+git clone --branch high-availability-cluster https://github.com/xazme/hashicorp-vault-template
 cd hashicorp-vault-template
 ```
-**2. Run the deployment script**
-This will create volumes, generate certificates via Terraform, and start the containers.
+**2. Configure Terraform Variables**
+Copy the provided example variables file to set up your local configuration. You can adjust the values inside if needed.
+```bash
+cp terraform/environments/dev/terraform.tfvars_example terraform/environments/dev/terraform.tfvars
+```
+**3. Run the deployment script**
+This script will create volumes, generate PKI certificates via Terraform, and start the Docker containers.
 ```bash
 sh deploy.sh
 ```
-**3. Access the Cluster**
+**4. Access the Cluster**
 * Vault API is exposed at `https://127.0.0.1:8200`.
 * The root token and unseal keys are automatically saved to `./hashicorp-vault-keys/vault-init.json`.
+
+
 ## Cleanup
 To destroy the cluster and remove generated certificates:
 ```bash

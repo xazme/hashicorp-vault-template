@@ -3,9 +3,9 @@ root_ca_subject = {
   country             = "BY"
   province            = "Grodno Region"
   locality            = "Grodno"
-  organization        = "AMSWI Tech LLC"
+  organization        = "Cool B2B AI SaaS"
   organizational_unit = "Infrastructure & Security"
-  common_name         = "Auto Parts Management System With Integrations Root CA (Dev)"
+  common_name         = "Cool B2B AI SaaS Root CA (Dev)"
 }
 
 root_ca_validity_period_hours = 87600 # 10 years (365 * 24 * 10)
@@ -17,9 +17,9 @@ intermediate_ca_subject = {
   country             = "BY"
   province            = "Grodno Region"
   locality            = "Grodno"
-  organization        = "AMSWI Tech LLC"
+  organization        = "Cool B2B AI SaaS "
   organizational_unit = "Infrastructure & Security"
-  common_name         = "Auto Parts Management System With Integrations Intermediate CA (Dev)"
+  common_name         = "Cool B2B AI SaaS Intermediate CA (Dev)"
 }
 
 intermediate_ca_validity_period_hours = 43800 # 5 years (365 * 24 * 5)
@@ -31,7 +31,7 @@ vault_cert_subject = {
   country             = "BY"
   province            = "Grodno Region"
   locality            = "Grodno"
-  organization        = "AMSWI Tech LLC"
+  organization        = "Cool B2B AI SaaS "
   organizational_unit = "Infrastructure & Security Vault"
 }
 vault_nodes_config = {
@@ -51,7 +51,7 @@ vault_nodes_config = {
     ip_addresses = ["127.0.0.1"]
   }
 }
-vault_cert_validity_period_hours = 365 * 24 * 5 # 5 years
+vault_cert_validity_period_hours = 35040 # 4 years (365 * 24 * 4)
 vault_key_algorithm              = "RSA"
 vault_key_rsa_bits               = 2048
 vault_certs_output_dir           = "overlays/dev/infrastructure/vault/certs"
