@@ -1,0 +1,12 @@
+volumes:
+  vault-data-1:
+    external: true
+    name: vault-data-1
+
+  vault-data-2:
+    external: true
+    name: vault-data-2
+
+  vault-data-3:
+    external: true
+    name: vault-data-3

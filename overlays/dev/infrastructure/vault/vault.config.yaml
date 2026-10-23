@@ -1,0 +1,7 @@
+configs:
+  node_1_config:
+    file: ./node-configs/vault-1.hcl
+  node_2_config:
+    file: ./node-configs/vault-2.hcl
+  node_3_config:
+    file: ./node-configs/vault-3.hcl

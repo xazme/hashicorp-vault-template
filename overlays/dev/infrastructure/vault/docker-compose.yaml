@@ -1,0 +1,68 @@
+include:
+  - path: ${PWD}/base/infrastructure/vault/vault.network.yaml
+  - path: ${PWD}/base/infrastructure/vault/vault.volume.yaml
+
+  - path: ${PWD}/overlays/dev/infrastructure/vault/vault.config.yaml
+  - path: ${PWD}/overlays/dev/infrastructure/vault/vault.volume.yaml
+
+services:
+  vault-1:
+    extends:
+      file: ${PWD}/base/infrastructure/vault/vault-common.yaml
+      service: vault-common
+    container_name: vault-1
+    hostname: vault-1
+    ports:
+      - "8200:8200"
+    networks:
+      vault-cluster:
+        aliases:
+          - vault-1.dev.internal
+    configs:
+      - source: node_1_config
+        target: /vault/config/vault.hcl
+    volumes:
+      - ./certs/vault-1/ca.pem:/vault/config/certs/ca.pem:ro
+      - ./certs/vault-1/vault.key:/vault/config/certs/vault.key:ro
+      - ./certs/vault-1/vault.pem:/vault/config/certs/vault.pem:ro
+      - vault-data-1:/vault/data
+
+  vault-2:
+    extends:
+      file: ${PWD}/base/infrastructure/vault/vault-common.yaml
+      service: vault-common
+    container_name: vault-2
+    hostname: vault-2
+    ports:
+      - "8201:8200"
+    networks:
+      vault-cluster:
+        aliases:
+          - vault-2.dev.internal
+    configs:
+      - source: node_2_config
+        target: /vault/config/vault.hcl
+    volumes:
+      - ./certs/vault-2:/vault/config/certs
+      - vault-data-2:/vault/data
+
+  vault-3:
+    extends:
+      file: ${PWD}/base/infrastructure/vault/vault-common.yaml
+      service: vault-common
+    container_name: vault-3
+    hostname: vault-3
+    ports:
+      - "8202:8200"
+    networks:
+      vault-cluster:
+        aliases:
+          - vault-3.dev.internal
+    configs:
+      - source: node_3_config
+        target: /vault/config/vault.hcl
+    volumes:
+      - ./certs/vault-3/ca.pem:/vault/config/certs/ca.pem:ro
+      - ./certs/vault-3/vault.key:/vault/config/certs/vault.key:ro
+      - ./certs/vault-3/vault.pem:/vault/config/certs/vault.pem:ro
+      - vault-data-3:/vault/data

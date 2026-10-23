@@ -1,0 +1,5 @@
+name: dev-amswi
+
+include:
+  - path:
+      - ${PWD}/overlays/dev/infrastructure/vault/docker-compose.yaml
