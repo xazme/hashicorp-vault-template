@@ -1,3 +1,5 @@
+name: vault-dev-cluster
+
 include:
   - path: ${PWD}/base/infrastructure/vault/vault.network.yaml
   - path: ${PWD}/base/infrastructure/vault/vault.volume.yaml
