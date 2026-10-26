@@ -48,7 +48,12 @@ resource "local_file" "vault_key_file" {
 
 resource "local_file" "vault_cert_file" {
   for_each = var.vault_nodes_config
-  content  = tls_locally_signed_cert.vault[each.key].cert_pem
+
+  content = join("\n", [
+    tls_locally_signed_cert.vault[each.key].cert_pem,
+    data.terraform_remote_state.intermediate_ca_generation.outputs.intermediate_ca_cert,
+  ])
+
   filename = "${path.cwd}/${var.vault_certs_output_dir}/vault-${each.key}/vault.pem"
 
   file_permission      = "0644"
@@ -57,7 +62,8 @@ resource "local_file" "vault_cert_file" {
 
 resource "local_file" "ca_file" {
   for_each = var.vault_nodes_config
-  content  = data.terraform_remote_state.intermediate_ca_generation.outputs.ca_chain
+
+  content  = data.terraform_remote_state.root_ca_generation.outputs.root_ca_cert
   filename = "${path.cwd}/${var.vault_certs_output_dir}/vault-${each.key}/ca.pem"
 
   file_permission      = "0644"
