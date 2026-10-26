@@ -11,6 +11,7 @@ plugin_tmpdir    = "/vault/plugins/tmp"
 
 listener "tcp" {
   address                            = "[::]:8200"
+  cluster_address                    = "[::]:8201"
   tls_cert_file                      = "/vault/config/certs/vault.pem"
   tls_key_file                       = "/vault/config/certs/vault.key"
   tls_client_ca_file                 = "/vault/config/certs/ca.pem"
